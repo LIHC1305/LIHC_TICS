@@ -63,13 +63,13 @@ while(seguir){
             for (let i = 0; i < datos.length; i++) {
                 if (datos[i].id === b) {
                     datos.splice(i, 1); // indice que indica la eliminacion de un elemento (1) desde la posición (i)
-                }
 
-                for (let j = i; j < datos.length; j++) {
-                    datos[j].id = datos[j].id - 1;
+                    for (let j = i; j < datos.length; j++) {
+                        datos[j].id = datos[j].id - 1;
+                    }
+                    eliminado = true;
+                    break;
                 }
-                eliminado = true;
-                break;
             }
 
             if (eliminado) {
