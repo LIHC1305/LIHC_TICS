@@ -8,7 +8,7 @@ while(seguir){
         "1. Agregar contacto \n" +
         "2. Listar contactos \n" +
         "3. Salir \n" +
-        "4. Buscar por ID"
+        "4. Borrar contacto"
     ));
 
     switch(opcion) {
@@ -18,7 +18,7 @@ while(seguir){
             let telefono = prompt("Ingresa tu telefono");
             let correo = prompt("Ingresa tu correo");
             let edad = parseInt(prompt("Ingresa tu edad"));
-            let id = datos.length + 1;
+            let id = parseInt(datos.length + 1);
 
             let agenda = { nombre, telefono, correo, edad, id };
 
@@ -52,32 +52,30 @@ while(seguir){
             break;
 
         case 4:
-            let a = parseInt(prompt("Ingresa el ID que deseas buscar"));
-            let respuesta = "";
-            let encontrado = false;
-
+            let b = parseInt(prompt("Ingresa el id del contacto que deseas borrar"));
+            let eliminado = false;
+            
             if (datos.length === 0) {
-                alert("Todavía no hay contactos registrados");
+                alert("No hay contactos registrados");
                 break;
             }
 
             for (let i = 0; i < datos.length; i++) {
-                if (datos[i].id === a) {
-                    respuesta += "ID: " + datos[i].id + "\n";
-                    respuesta += "Nombre: " + datos[i].nombre + "\n";
-                    respuesta += "Telefono: " + datos[i].telefono + "\n";
-                    respuesta += "Correo: " + datos[i].correo + "\n";
-                    respuesta += "Edad: " + datos[i].edad + "\n";
-
-                    encontrado = true;
-                    break;
+                if (datos[i].id === b) {
+                    datos.splice(i, 1); // indice que indica la eliminacion de un elemento (1) desde la posición (i)
                 }
+
+                for (let j = i; j < datos.length; j++) {
+                    datos[j].id = datos[j].id - 1;
+                }
+                eliminado = true;
+                break;
             }
 
-            if (encontrado) {
-                alert(respuesta);
+            if (eliminado) {
+                alert("Contacto eliminado correctamente");
             } else {
-                alert("No existe un contacto con este ID");
+                alert("No existe un contacto con ese ID");
             }
 
             break;
